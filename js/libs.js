@@ -19027,7 +19027,6 @@ $(function() {
   // Contact Forms Open/Close Start
   // Notify Form Open
   notifyTrigger.on('click', function(event){
-		debugger
     event.preventDefault();
 		// Vi skippar maillistan i en här versionen
 		// mainSection.addClass('notify-is-visible');

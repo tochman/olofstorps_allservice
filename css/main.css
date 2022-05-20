@@ -657,12 +657,12 @@ h1.light-text {
 }
 @media only screen and (min-width: 768px) {
   h1 {
-    font-size: 7rem;
+    font-size: 6.4rem;
   }
 }
 @media only screen and (min-width: 1400px) {
   h1 {
-    font-size: 11rem;
+    font-size: 10rem;
     margin-bottom: 3.2rem;
   }
 }
