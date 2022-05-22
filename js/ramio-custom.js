@@ -165,17 +165,19 @@ $(function() {
   // --------------------------------------------- //
   // Vegas Kenburns Start
   // --------------------------------------------- //
+  
   var bgndKenburns = $('#bgndKenburns');
   if(bgndKenburns.length){
     bgndKenburns.vegas({
       timer: false,
-      delay: 8000,
+      delay: 6000,
       transition: 'fade2',
-      transitionDuration: 2000,
+      transitionDuration: 1500,
       slides: [
-        { src: "https://mail.google.com/mail/u/0?ui=2&ik=0986191762&attid=0.1&permmsgid=msg-f:1733278875069244989&th=180dd7f41d30e63d&view=fimg&fur=ip&sz=s0-l75-ft&attbid=ANGjdJ8bDCYgby-E0RxG-gmJ_3zDCy862-q2IXDkwkmLo3bfr42ZBFwWyJt9ejkbdiVGYrkvbmlKw1N5PV_vWxHZ8gHMw3TN6KjsBjrhsKCpA4G68pHQDUIJ5LQmSsE&disp=emb" },
-        { src: "https://mail.google.com/mail/u/0?ui=2&ik=0986191762&attid=0.2&permmsgid=msg-f:1733278875069244989&th=180dd7f41d30e63d&view=fimg&fur=ip&sz=s0-l75-ft&attbid=ANGjdJ9YbVYhcAK_7WfL-b-wN2cXozWd96x7mQp5xSnEWBMMf99K612tEbTwt2W4keMQDR8myWxO2s9qaGhvDVPsgspQuSR3wo1uTwz922Zlocd5PUtAlANDvGOIkOA&disp=emb" },
-        { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHX4QML9WI_BI7I-KekQqlxXYTAtD6qS-IQ6RfvWRRsCW2y-MxenEEuxf4GIH1JxQfS0Y&usqp=CAU" }
+        { src: "img/olofstorps/exterior_house_1.jpg" },
+        { src: "img/olofstorps/interior_painting_1.jpg" },
+        { src: "img/olofstorps/interior_stairs_4.jpg" },
+        { src: "img/olofstorps/interior_stairs_3.jpg" },
       ],
       animation: [ 'kenburnsUp', 'kenburnsDown', 'kenburnsLeft', 'kenburnsRight' ]
     });
