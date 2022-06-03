@@ -174,10 +174,9 @@ $(function() {
       transition: 'fade2',
       transitionDuration: 1500,
       slides: [
+        { src: "img/olofstorps/murat_1_new.png" },
+        { src: "img/olofstorps/murat_2_new.png" },
         { src: "img/olofstorps/exterior_house_1.jpg" },
-        { src: "img/olofstorps/interior_painting_1.jpg" },
-        { src: "img/olofstorps/interior_stairs_4.jpg" },
-        { src: "img/olofstorps/interior_stairs_3.jpg" },
       ],
       animation: [ 'kenburnsUp', 'kenburnsDown', 'kenburnsLeft', 'kenburnsRight' ]
     });
