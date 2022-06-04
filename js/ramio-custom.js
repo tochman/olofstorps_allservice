@@ -126,8 +126,8 @@ $(function () {
 
   $("#contact-form").on("submit", (event) => {
     event.preventDefault();
-    const form = $(this);
-    const formData = new FormData(event.target);
+    const form = event.target
+    const formData = new FormData(form);
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
