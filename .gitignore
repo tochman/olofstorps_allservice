@@ -37,4 +37,7 @@ Temporary Items
 
 source-files
 
+#VSCode
+.vscode
+
 

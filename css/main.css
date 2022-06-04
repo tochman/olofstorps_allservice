@@ -103,19 +103,19 @@
 }
 
 .feature-1 {
-  background-image: url("http://via.placeholder.com/1200x900");
+  background-image: url("/img/olofstorps/fasad_2.JPG");
 }
 
 .feature-2 {
-  background-image: url("http://via.placeholder.com/1200x900");
+  background-image: url("/img/olofstorps/interior_stairs_1.jpg");
 }
 
 .feature-3 {
-  background-image: url("http://via.placeholder.com/1200x900");
+  background-image: url("/img/olofstorps/murat_2_new.png");
 }
 
 .feature-4 {
-  background-image: url("http://via.placeholder.com/1200x900");
+  background-image: url("/img/olofstorps/exterior_house_1.jpg");
 }
 
 .feature-dark-1 {
@@ -135,11 +135,11 @@
 }
 
 .blockquote {
-  background-image: url("http://via.placeholder.com/1200x1080");
+  background-image: url("/img/olofstorps/interior_stairs_3.jpg");
 }
 
 .blockquote-dark {
-  background-image: url("http://via.placeholder.com/1200x1080");
+  background-image: url("/img/olofstorps/interior_stairs_3.jpg");
 }
 
 /* ------------------------------------------------*/
@@ -2255,11 +2255,19 @@ form .inputs-description {
   }
 }
 
-.blockquote__content {
+/* .blockquote__content {
   position: relative;
   padding: 8rem 0 0 0;
   z-index: 1;
   max-width: 660px;
+} */
+
+.blockquote__content {
+  position: relative;
+  padding: 8rem !important;
+  z-index: 1;
+  max-width: 660px;
+  background: rgba(255,255,255, 0.3);
 }
 .blockquote__content blockquote {
   display: block;
