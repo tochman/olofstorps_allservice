@@ -139,7 +139,7 @@ $(function () {
         setTimeout(() => {
           $(".writealine").find(".reply-group").removeClass("is-visible");
           $(".writealine").find(".form").delay(300).removeClass("is-hidden");
-          form.trigger("reset");
+          $("#contact-form").trigger("reset");
         }, 5000);
       })
       .catch((error) => alert(error));
