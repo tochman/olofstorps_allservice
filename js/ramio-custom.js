@@ -29,6 +29,42 @@
 // Table of Contents End
 // ------------------------------------------------
 
+$.fn.isInViewport = function () {
+  let elementTop = $(this).offset().top;
+  let elementBottom = elementTop + $(this).outerHeight();
+
+  let viewportTop = $(window).scrollTop();
+  let viewportBottom = viewportTop + $(window).height();
+
+  return (
+    elementBottom > viewportTop  &&
+    elementTop  < viewportBottom
+  );
+};
+
+function handleScroll(el) {
+  console.warn("hitting scroll handler");
+  if (el.classList.contains("about__info")) {
+    const featureSections = $(".project");
+    const projectSideImageSection = $("#project-bg");
+    let project2isVisible = $(featureSections[1]).isInViewport();
+    let project1isVisible = $(featureSections[0]).isInViewport();
+    if (project2isVisible) {
+      projectSideImageSection.hasClass("project-bg-1") &&
+        projectSideImageSection
+          .removeClass("project-bg-1")
+          .addClass("project-bg-2");
+    }
+    if (project1isVisible && projectSideImageSection.hasClass("project-bg-2")) {
+      projectSideImageSection
+        // .fadeOut("fast")
+        .removeClass("project-bg-2")
+        .addClass("project-bg-1");
+      // .fadeIn("fast");
+    }
+  }
+}
+
 $(window).on("load", function () {
   "use strict";
 
@@ -152,6 +188,7 @@ $(function () {
   // --------------------------------------------- //
   // Custom Scrollbar Start
   // --------------------------------------------- //
+
   $(window).on("load resize", function () {
     var selector = ".scroll", //your element(s) selector
       cssFlag = window
@@ -159,7 +196,13 @@ $(function () {
         .getPropertyValue("content")
         .replace(/"/g, "");
     if (cssFlag) {
-      $(selector).mCustomScrollbar();
+      $(selector).mCustomScrollbar({
+        callbacks: {
+          onScroll: function () {
+            handleScroll(this);
+          },
+        },
+      });
     } else {
       $(selector).mCustomScrollbar("destroy");
     }

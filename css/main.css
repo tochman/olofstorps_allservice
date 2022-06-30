@@ -82,9 +82,7 @@
   background-image: url("http://via.placeholder.com/900x1200");
 }
 
-.static-bg-1 {
-  background-image: url("/img/olofstorps/projects/project_1/project_1_3.jpg");
-}
+
 
 .static-bg-2 {
   background-image: url("http://via.placeholder.com/900x1200");
@@ -102,17 +100,52 @@
   background-image: url("http://via.placeholder.com/900x1200");
 }
 
-.feature-1 {
-  background-image: url("/img/olofstorps/fasad_2.JPG");
+/* Project Images */
+
+.project-bg-1 {
+  background-image: url("/img/olofstorps/projects/project_1/project_1_3.jpg");
 }
 
-.feature-2 {
-  background-image: url("/img/olofstorps/interior_stairs_1.jpg");
+.blockquote-project-1 {
+  background-image: url("/img/olofstorps/projects/project_1/project_1_4.jpg");
 }
 
-.feature-3 {
-  background-image: url("/img/olofstorps/murat_2_new.png");
+.project-1-1 {
+  background-image: url("/img/olofstorps/projects/project_1/project_1_1.jpg");
 }
+
+.project-1-2 {
+  background-image: url("/img/olofstorps/projects/project_1/project_1_2.jpg");
+}
+
+.project-1-3 {
+  background-image: url("/img/olofstorps/projects/project_1/project_1_3.jpg");
+}
+.project-1-4 {
+  background-image: url("/img/olofstorps/projects/project_1/project_1_4.jpg");
+}
+
+.project-bg-2 {
+  background-image: url("/img/olofstorps/projects/project_2/project_2_2.jpg");
+}
+
+.blockquote-project-2 {
+  background-image: url("/img/olofstorps/projects/project_2/project_2_2.jpg");
+}
+
+.project-2-0 {
+  background-image: url("/img/olofstorps/projects/project_2/project_2_0.jpg");
+}
+
+.project-2-1 {
+  background-image: url("/img/olofstorps/projects/project_2/project_2_1.jpg");
+}
+
+.project-2-2 {
+  background-image: url("/img/olofstorps/projects/project_2/project_2_2.jpg");
+}
+
+
 
 .feature-4 {
   background-image: url("/img/olofstorps/exterior_house_1.jpg");
@@ -134,9 +167,7 @@
   background-image: url("http://via.placeholder.com/1200x900");
 }
 
-.blockquote {
-  background-image: url("/img/olofstorps/interior_stairs_3.jpg");
-}
+
 
 .blockquote-dark {
   background-image: url("/img/olofstorps/interior_stairs_3.jpg");
@@ -2267,7 +2298,7 @@ form .inputs-description {
   padding: 8rem !important;
   z-index: 1;
   max-width: 660px;
-  background: rgba(255,255,255, 0.3);
+  background: rgba(0,0,0, 0.4);
 }
 .blockquote__content blockquote {
   display: block;
@@ -2277,11 +2308,11 @@ form .inputs-description {
   margin: 0 0 2.4rem 0;
   font-family: "Libre Baskerville", serif;
   font-size: 2rem;
-  color: #303030;
+  color: #f9f6f6;
 }
 .blockquote__content blockquote cite {
   font-size: 1.4rem;
-  color: #616161;
+  color: #f9f6f6;
 }
 .blockquote__content blockquote cite span {
   display: block;
