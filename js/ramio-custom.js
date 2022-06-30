@@ -43,7 +43,6 @@ $.fn.isInViewport = function () {
 };
 
 function handleScroll(el) {
-  console.warn("hitting scroll handler");
   if (el.classList.contains("about__info")) {
     const featureSections = $(".project");
     const projectSideImageSection = $("#project-bg");
