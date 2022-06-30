@@ -126,7 +126,7 @@ $(function () {
 
   $("#contact-form").on("submit", (event) => {
     event.preventDefault();
-    const form = event.target
+    const form = event.target;
     const formData = new FormData(form);
     fetch("/", {
       method: "POST",
@@ -199,9 +199,9 @@ $(function () {
       transition: "fade2",
       transitionDuration: 1500,
       slides: [
-        { src: "img/olofstorps/murat_1_new.png" },
-        { src: "img/olofstorps/murat_2_new.png" },
-        { src: "img/olofstorps/exterior_house_1.jpg" },
+        { src: "img/olofstorps/projects/project_1/project_1_4.jpg" },
+        { src: "img/olofstorps/projects/project_2/project_2_1.jpg" },
+        { src: "img/olofstorps/projects/project_5/project_5_2.jpg" },
       ],
       animation: [
         "kenburnsUp",
