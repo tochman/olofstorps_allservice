@@ -100,7 +100,8 @@
   background-image: url("http://via.placeholder.com/900x1200");
 }
 
-/* Project Images */
+/* Project Images & Backgrounds */
+/* Must be numerated in sequence */
 
 .project-bg-1 {
   background-image: url("/img/olofstorps/projects/project_1/project_1_3.jpg");
@@ -145,33 +146,55 @@
   background-image: url("/img/olofstorps/projects/project_2/project_2_2.jpg");
 }
 
-
-
-.feature-4 {
-  background-image: url("/img/olofstorps/exterior_house_1.jpg");
+.project-bg-3 {
+  background-image: url("/img/olofstorps/projects/project_3/project_3_1.jpg");
 }
 
-.feature-dark-1 {
-  background-image: url("http://via.placeholder.com/1200x900");
+.blockquote-project-3 {
+  background-image: url("/img/olofstorps/projects/project_3/project_3_2.jpg");
 }
 
-.feature-dark-2 {
-  background-image: url("http://via.placeholder.com/1200x900");
+.project-3-1 {
+  background-image: url("/img/olofstorps/projects/project_3/project_3_1.jpg");
 }
 
-.feature-dark-3 {
-  background-image: url("http://via.placeholder.com/1200x900");
+.project-3-2 {
+  background-image: url("/img/olofstorps/projects/project_3/project_3_2.jpg");
 }
 
-.feature-dark-4 {
-  background-image: url("http://via.placeholder.com/1200x900");
+.project-bg-4 {
+  background-image: url("/img/olofstorps/projects/project_4/project_4_1.jpg");
+}
+
+.blockquote-project-4 {
+  background-image: url("/img/olofstorps/projects/project_4/project_4_2.jpg");
+}
+
+.project-4-1 {
+  background-image: url("/img/olofstorps/projects/project_4/project_4_1.jpg");
+}
+
+.project-4-2 {
+  background-image: url("/img/olofstorps/projects/project_4/project_4_2.jpg");
+}
+
+.project-bg-5 {
+  background-image: url("/img/olofstorps/projects/project_5/project_5_1.jpg");
+}
+
+.blockquote-project-5 {
+  background-image: url("/img/olofstorps/projects/project_5/project_5_2.jpg");
+}
+
+.project-5-1 {
+  background-image: url("/img/olofstorps/projects/project_5/project_5_1.jpg");
+}
+
+.project-5-2 {
+  background-image: url("/img/olofstorps/projects/project_5/project_5_2.jpg");
 }
 
 
-
-.blockquote-dark {
-  background-image: url("/img/olofstorps/interior_stairs_3.jpg");
-}
 
 /* ------------------------------------------------*/
 /* Template Backgrounds End */

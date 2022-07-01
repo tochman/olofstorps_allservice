@@ -36,31 +36,20 @@ $.fn.isInViewport = function () {
   let viewportTop = $(window).scrollTop();
   let viewportBottom = viewportTop + $(window).height();
 
-  return (
-    elementBottom > viewportTop  &&
-    elementTop  < viewportBottom
-  );
+  return elementBottom > viewportTop && elementTop < viewportBottom;
 };
 
 function handleScroll(el) {
   if (el.classList.contains("about__info")) {
-    const featureSections = $(".project");
+    const projectSections = $("#projects");
     const projectSideImageSection = $("#project-bg");
-    let project2isVisible = $(featureSections[1]).isInViewport();
-    let project1isVisible = $(featureSections[0]).isInViewport();
-    if (project2isVisible) {
-      projectSideImageSection.hasClass("project-bg-1") &&
-        projectSideImageSection
-          .removeClass("project-bg-1")
-          .addClass("project-bg-2");
-    }
-    if (project1isVisible && projectSideImageSection.hasClass("project-bg-2")) {
-      projectSideImageSection
-        // .fadeOut("fast")
-        .removeClass("project-bg-2")
-        .addClass("project-bg-1");
-      // .fadeIn("fast");
-    }
+    Array.from(projectSections.children()).map((section, index) => {
+      if ($(section).isInViewport()) {
+        $(projectSideImageSection).attr("class", function (i, c) {
+          return c.replace(/(^|\s)project-bg\S+/g, ` project-bg-${index + 1}`);
+        });
+      }
+    });
   }
 }
 
