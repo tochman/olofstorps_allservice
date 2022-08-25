@@ -148,10 +148,6 @@ $(function () {
   // 	return false;
   // });
 
-  function handeContactForm(event) {
-    debugger;
-  }
-
   $("#contact-form").on("submit", (event) => {
     debugger
     event.preventDefault();
