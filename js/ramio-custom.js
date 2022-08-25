@@ -148,7 +148,12 @@ $(function () {
   // 	return false;
   // });
 
-  $("[name=contact-form-v2]").on("submit", (event) => {
+  function handeContactForm(event) {
+    debugger;
+  }
+
+  $("#contact-form").on("submit", (event) => {
+    debugger
     event.preventDefault();
     const form = event.target;
     const formData = new FormData(form);
@@ -163,7 +168,7 @@ $(function () {
         setTimeout(() => {
           $(".writealine").find(".reply-group").removeClass("is-visible");
           $(".writealine").find(".form").delay(300).removeClass("is-hidden");
-          $("[name=contact-form-v2]").trigger("reset");
+          $("#contact-form").trigger("reset");
         }, 5000);
       })
       .catch((error) => alert(error));

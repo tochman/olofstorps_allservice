@@ -654,7 +654,7 @@
         <!-- Contact Form Section Title End -->
 
         <!-- Contact Form Block Start -->
-        <div id="contact-form"></div>
+        <div id="contact-form-section"></div>
       </div>
     </div>
     <!-- Contact Form Section End -->
@@ -846,7 +846,7 @@
       });
       $.get("templates/contact-form.hbs", function (data) {
         const template = Handlebars.compile(data);
-        $("#contact-form").html(template());
+        $("#contact-form-section").html(template());
       });
     </script>
   </body>
