@@ -148,7 +148,7 @@ $(function () {
   // 	return false;
   // });
 
-  $("#contact-form").on("submit", (event) => {
+  $("[name=contact-form-v2]").on("submit", (event) => {
     event.preventDefault();
     const form = event.target;
     const formData = new FormData(form);
@@ -163,7 +163,7 @@ $(function () {
         setTimeout(() => {
           $(".writealine").find(".reply-group").removeClass("is-visible");
           $(".writealine").find(".form").delay(300).removeClass("is-hidden");
-          $("#contact-form").trigger("reset");
+          $("[name=contact-form-v2]").trigger("reset");
         }, 5000);
       })
       .catch((error) => alert(error));
