@@ -149,7 +149,6 @@ $(function () {
   // });
 
   $("#contact-form").on("submit", (event) => {
-    debugger
     event.preventDefault();
     const form = event.target;
     const formData = new FormData(form);

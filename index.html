@@ -654,98 +654,91 @@
         <!-- Contact Form Section Title End -->
 
         <!-- Contact Form Block Start -->
-        <div id="contact-form-section">
-          <form
-            class="form form-light contact-form"
-            id="contact-form"
-            name="contact-form"
-            method="POST"
-            data-netlify="true"
-          >
-            <!-- Hidden Required Fields -->
-            <input
-              type="hidden"
-              name="project_name"
-              value="Olofstorps Allservice - Kontaktformulär"
-            />
-            <input
-              type="hidden"
-              name="admin_email"
-              value="info@olofstorps.se"
-            />
-            <input type="hidden" name="form_subject" value="Kontaktformulär" />
-            <!-- END Hidden Required Fields-->
-            <div class="container-fluid p-0">
-              <div class="row gx-5">
-                <div class="col-12 col-md-6">
-                  <input
-                    type="text"
-                    name="Name"
-                    placeholder="Ditt namn*"
-                    required
-                  />
-                </div>
-                <div class="col-12 col-md-6">
-                  <input type="text" name="Company" placeholder="Företag" />
-                </div>
-                <div class="col-12 col-md-6">
-                  <input
-                    type="email"
-                    name="E-mail"
-                    placeholder="Email*"
-                    required
-                  />
-                </div>
-                <div class="col-12 col-md-6">
-                  <input
-                    type="tel"
-                    name="Phone"
-                    placeholder="Telefonnummer*"
-                    required
-                  />
-                </div>
-                <div class="col-12">
-                  <textarea
-                    name="Message"
-                    placeholder="Eventuellt meddelande"
-                  ></textarea>
-                </div>
-                <div class="col-12">
-                  <span class="inputs-description"> *Obligatoriska fält </span>
-                  <button type="submit" class="button button-l button-light">
-                    <span class="button-caption"> Skicka </span>
-                  </button>
+        <div class="blocks__single">
+          <div class="form-container">
+            <!-- Reply Group Start -->
+            <div class="reply-group">
+              <span class="material-icons txt-light">
+                done
+              </span>
+              <p class="reply-group__title txt-light">
+                <span>
+                  Done
+                </span>
+                !
+              </p>
+              <span class="reply-group__text txt-light-transparent">
+                Tack för ditt meddelande. Vi återkommer till dig snarast.
+              </span>
+            </div>
+            <!-- Reply Group End -->
+            <!-- Contact Form Start -->
+            <form
+              class="form form-light contact-form"
+              id="contact-form"
+              name="site-contact-form"
+              method="POST"
+              data-netlify="true" 
+            >
+              <!-- Hidden Required Fields -->
+              <input
+                type="hidden"
+                name="project_name"
+                value="Olofstorps Allservice - Kontaktformulär"
+              />
+              <input type="hidden" name="admin_email" value="info@olofstorps.se" />
+              <input type="hidden" name="form_subject" value="Kontaktformulär" />
+              <!-- END Hidden Required Fields-->
+              <div class="container-fluid p-0">
+                <div class="row gx-5">
+                  <div class="col-12 col-md-6">
+                    <input type="text" name="Name" placeholder="Ditt namn*" required />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <input type="text" name="Company" placeholder="Företag" />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <input type="email" name="E-mail" placeholder="Email*" required />
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <input
+                      type="tel"
+                      name="Phone"
+                      placeholder="Telefonnummer*"
+                      required
+                    />
+                  </div>
+                  <div class="col-12">
+                    <textarea
+                      name="Message"
+                      placeholder="Eventuellt meddelande"
+                    ></textarea>
+                  </div>
+                  <div class="col-12">
+                    <span class="inputs-description">
+                      *Obligatoriska fält
+                    </span>
+                    <button type="submit" class="button button-l button-light">
+                      <span class="button-caption">
+                        Skicka
+                      </span>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          </form>
+            </form>
+            <!-- Contact Form End -->
+            <!-- Reply Group Start -->
+            
+            <!-- Reply Group End -->
+          </div>
         </div>
-      </div>
-    </div>
-    <!-- Contact Form Section End -->
+        <!-- Contact Form Block End -->
 
     <!-- Notify Section Start -->
     <div class="popup notify">
-      <!-- Close Button Start -->
-      <div class="popup__controls">
-        <a href="#0" id="notify-close" class="section-close light">
-          <span class="material-icons">arrow_back</span>
-        </a>
-      </div>
-      <!-- Close Button End -->
-
       <!-- Notify Content Start-->
       <div class="popup__content">
-        <!-- Notify Title Start -->
-        <div class="popup__title">
-          <h4 class="title txt-light">Håll dig underrättad</h4>
-          <p class="subtitle txt-light-transparent">
-            Prenumerera på vårt nyhetsbrev och få nyheter och erbjudanden från
-            oss. Du kan avsluta prenumerationen när som helst.
-          </p>
-        </div>
-        <!-- Notify Title End -->
-
         <!-- Notify Form Container Start -->
         <div class="blocks__single">
           <div class="form-container">
@@ -768,19 +761,7 @@
             </div>
             <!-- Reply Messages End-->
 
-            <!-- Notify Contact Form Start-->
-            <form class="notify-form form form-light">
-              <input
-                class=""
-                type="email"
-                placeholder="Email Adress*"
-                required
-              />
-              <button class="button button-l button-light" type="submit">
-                <span class="button-caption">Skicka</span>
-              </button>
-            </form>
-            <!-- Notify Contact Form End-->
+            
           </div>
         </div>
         <!-- Notify Form Container End -->
