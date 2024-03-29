@@ -23752,6 +23752,7 @@ $(function () {
 
     setTimeout(function () {
       $("body").addClass("overflow-hidden");
+  
     }, 150);
   });
 
