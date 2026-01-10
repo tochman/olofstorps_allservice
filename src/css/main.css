@@ -1797,6 +1797,10 @@ form .inputs-description {
 .inner .scroll {
   pointer-events: auto;
 }
+.inner .my-gallery,
+.inner .my-gallery * {
+  pointer-events: auto;
+}
 @media only screen and (min-width: 1200px) {
   .inner {
     position: absolute;
@@ -2669,10 +2673,10 @@ form .inputs-description {
     transition: transform 0.5s, opacity 0.5s;
     transition: transform 0.5s, opacity 0.5s, -webkit-transform 0.5s, -moz-transform 0.5s;
   }
-  .no-touch .my-gallery__item:hover::after {
+  .my-gallery__item:hover::after {
     opacity: 1;
   }
-  .no-touch .my-gallery__item:hover figcaption h4 {
+  .my-gallery__item:hover figcaption h4 {
     -webkit-transform: translateX(0);
        -moz-transform: translateX(0);
         -ms-transform: translateX(0);
