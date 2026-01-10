@@ -119,11 +119,17 @@ export class Navigation {
   openSection(sectionKey) {
     const section = this.sections[sectionKey];
     console.log(`Opening section: ${sectionKey}`, section);
+    console.log(`Section has is-visible: ${section?.classList.contains('is-visible')}`);
     
     if (section) {
       // Check if this section is already visible
       if (section.classList.contains('is-visible')) {
-        console.log('Section already visible');
+        console.log('Section already visible - forcing re-render');
+        // Remove and re-add to force animation
+        section.classList.remove('is-visible');
+        setTimeout(() => {
+          section.classList.add('is-visible');
+        }, 50);
         return;
       }
       

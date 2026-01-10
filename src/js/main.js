@@ -62,12 +62,15 @@ class App {
     
     try {
       for (const project of projects) {
+        console.log(`Loading ${project.name} from ${project.path}...`);
         await templateEngine.loadAndRender(
           project.name,
           project.path,
           {},
           project.target
         );
+        const target = document.querySelector(project.target);
+        console.log(`${project.name} rendered. Content length:`, target?.innerHTML?.length || 0);
       }
       console.log('✅ Templates loaded successfully');
       
@@ -75,6 +78,7 @@ class App {
       window.dispatchEvent(new CustomEvent('templatesLoaded'));
     } catch (error) {
       console.error('❌ Error loading templates:', error);
+      console.error('Error details:', error.message, error.stack);
     }
   }
   
