@@ -108,8 +108,17 @@
               </div>
               <!-- Logo End -->
 
+              <!-- Mobile Menu Toggle -->
+              <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Öppna meny">
+                <span class="material-icons">menu</span>
+              </button>
+              <!-- Mobile Menu Toggle End -->
+
               <!-- Main Menu Start -->
-              <div class="intro__menu">
+              <div class="intro__menu" id="intro-menu">
+                <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Stäng meny">
+                  <span class="material-icons">close</span>
+                </button>
                 <nav>
                   <ul>
                     <li><a href="#" id="about-trigger">Jobba med oss</a></li>
@@ -604,7 +613,7 @@
           <!-- Contact Media Map Static (on Desktop) Start -->
           <div class="col-12 col-xl-6 static fullheight contact__map">
             <!-- Google Map Start -->
-            <div class="map">
+            <div class="map" style="display: none;">
               <div id="google-map">
                 <div id="google-container"></div>
                 <div id="zoom-in">

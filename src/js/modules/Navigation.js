@@ -43,7 +43,34 @@ export class Navigation {
     
     this.setupTriggers();
     this.setupCloseButtons();
+    this.setupMobileMenu();
     this.setupScrollHandling();
+  }
+  
+  setupMobileMenu() {
+    const menuToggle = document.querySelector('#mobile-menu-toggle');
+    const menuClose = document.querySelector('#mobile-menu-close');
+    const menu = document.querySelector('#intro-menu');
+    
+    if (menuToggle && menu) {
+      menuToggle.addEventListener('click', () => {
+        menu.classList.add('is-open');
+      });
+    }
+    
+    if (menuClose && menu) {
+      menuClose.addEventListener('click', () => {
+        menu.classList.remove('is-open');
+      });
+    }
+    
+    // Close mobile menu when a nav link is clicked
+    const navLinks = menu?.querySelectorAll('a');
+    navLinks?.forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.remove('is-open');
+      });
+    });
   }
   
   setupTriggers() {
@@ -99,7 +126,7 @@ export class Navigation {
       );
       
       if (currentlyVisible) {
-        // A section is open, close it first then open the new one
+        // A section is open, animate it out first then open the new one
         console.log(`Closing ${currentlyVisible} before opening ${sectionKey}`);
         this.closeSection(currentlyVisible);
         
@@ -131,8 +158,15 @@ export class Navigation {
     console.log(`Closing section: ${sectionKey}`, section);
     
     if (section) {
+      // Add animating-out class to trigger out animation while keeping z-index high
+      section.classList.add('is-animating-out');
       section.classList.remove('is-visible');
       document.body.style.overflow = '';
+      
+      // Remove animating-out class after animation completes
+      setTimeout(() => {
+        section.classList.remove('is-animating-out');
+      }, 600);
     }
   }
   
