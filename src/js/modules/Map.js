@@ -38,11 +38,11 @@ export class Map {
       zoomControl: false // We'll use custom controls
     });
 
-    // Add grayscale tile layer
-    L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
-      maxZoom: 20,
-      className: 'map-grayscale'
+    // Add grayscale tile layer - using free OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 19,
+      className: 'map-tiles'
     }).addTo(this.map);
 
     // Add marker for company location

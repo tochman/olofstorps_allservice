@@ -10,8 +10,8 @@
 }
 
 /* Grayscale tile filter */
-.leaflet-tile {
-  filter: grayscale(100%) brightness(0.95);
+.map-tiles {
+  filter: grayscale(100%) brightness(1.1) contrast(0.9);
 }
 
 /* Map container needs explicit height */
