@@ -1,0 +1,8 @@
+[build]
+  command = "npm run build && mkdir -p dist/js && cp js/libs.min.js js/gallery-init.js dist/js/"
+  publish = "dist"
+  
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
