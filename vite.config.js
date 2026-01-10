@@ -15,7 +15,13 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
       },
+      external: [
+        '/js/libs.min.js',
+        '/js/gallery-init.js',
+        '/source-files/modernizr/modernizr.js'
+      ]
     },
+    copyPublicDir: true,
   },
 
   server: {
