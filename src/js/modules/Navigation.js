@@ -41,6 +41,15 @@ export class Navigation {
     
     console.log('Navigation initialized with triggers:', this.triggers);
     
+    // Ensure all sections start closed (remove any is-visible classes)
+    Object.keys(this.sections).forEach(key => {
+      const section = this.sections[key];
+      if (section && section.classList.contains('is-visible')) {
+        console.warn(`Section ${key} has is-visible class on init - removing it`);
+        section.classList.remove('is-visible');
+      }
+    });
+    
     this.setupTriggers();
     this.setupCloseButtons();
     this.setupMobileMenu();
@@ -122,20 +131,14 @@ export class Navigation {
     console.log(`Section has is-visible: ${section?.classList.contains('is-visible')}`);
     
     if (section) {
-      // Check if this section is already visible
-      if (section.classList.contains('is-visible')) {
-        console.log('Section already visible - forcing re-render');
-        // Remove and re-add to force animation
-        section.classList.remove('is-visible');
-        setTimeout(() => {
-          section.classList.add('is-visible');
-        }, 50);
-        return;
-      }
+      // Always remove first to ensure clean state
+      section.classList.remove('is-visible');
       
-      // Check if any section is currently visible
+      // Check if any OTHER section is currently visible
       const currentlyVisible = Object.keys(this.sections).find(key => 
-        this.sections[key] && this.sections[key].classList.contains('is-visible')
+        key !== sectionKey && 
+        this.sections[key] && 
+        this.sections[key].classList.contains('is-visible')
       );
       
       if (currentlyVisible) {
