@@ -28,9 +28,6 @@ class App {
   async init() {
     console.log('🚀 Initializing Olofstorp Allservice...');
     
-    // Initialize loader
-    loader.init();
-    
     // Load project templates
     await this.loadProjectTemplates();
     
@@ -45,6 +42,9 @@ class App {
     
     // Initialize Leaflet map
     this.initializeMap();
+    
+    // Hide loader after initialization
+    loader.hide();
     
     console.log('✅ Application initialized successfully!');
   }

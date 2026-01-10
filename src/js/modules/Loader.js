@@ -12,11 +12,7 @@ export class Loader {
     this.main = $('#main');
   }
   
-  init() {
-    window.addEventListener('load', () => this.hide());
-  }
-  
-  async hide() {
+  hide() {
     // Animate logo and caption out
     setTimeout(() => {
       if (this.logo) {
