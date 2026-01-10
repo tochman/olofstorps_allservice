@@ -87,8 +87,40 @@ export class Navigation {
     console.log(`Opening section: ${sectionKey}`, section);
     
     if (section) {
-      section.classList.add('is-visible');
-      document.body.style.overflow = 'hidden';
+      // Check if this section is already visible
+      if (section.classList.contains('is-visible')) {
+        console.log('Section already visible');
+        return;
+      }
+      
+      // Check if any section is currently visible
+      const currentlyVisible = Object.keys(this.sections).find(key => 
+        this.sections[key] && this.sections[key].classList.contains('is-visible')
+      );
+      
+      if (currentlyVisible) {
+        // A section is open, close it first then open the new one
+        console.log(`Closing ${currentlyVisible} before opening ${sectionKey}`);
+        this.closeSection(currentlyVisible);
+        
+        // Wait for close animation to complete (600ms as per CSS)
+        setTimeout(() => {
+          section.classList.add('is-visible');
+          
+          // Only lock body overflow for popups
+          if (sectionKey === 'notify' || sectionKey === 'writealine') {
+            document.body.style.overflow = 'hidden';
+          }
+        }, 650);
+      } else {
+        // No section open, just open the new one
+        section.classList.add('is-visible');
+        
+        // Only lock body overflow for popups
+        if (sectionKey === 'notify' || sectionKey === 'writealine') {
+          document.body.style.overflow = 'hidden';
+        }
+      }
     } else {
       console.error(`Section not found: ${sectionKey}`);
     }
@@ -102,6 +134,16 @@ export class Navigation {
       section.classList.remove('is-visible');
       document.body.style.overflow = '';
     }
+  }
+  
+  closeAllSections() {
+    Object.keys(this.sections).forEach(key => {
+      const section = this.sections[key];
+      if (section) {
+        section.classList.remove('is-visible');
+      }
+    });
+    document.body.style.overflow = '';
   }
   
   setupScrollHandling() {

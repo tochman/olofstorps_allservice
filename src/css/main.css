@@ -1313,6 +1313,7 @@ form .inputs-description {
   padding: 0;
   background-color: #1f1f1f;
   overflow: hidden;
+  z-index: 5;
   -webkit-transform: translateY(0);
      -moz-transform: translateY(0);
       -ms-transform: translateY(0);
@@ -1705,6 +1706,17 @@ form .inputs-description {
   position: relative;
   width: 100%;
   background-color: transparent;
+  pointer-events: none;
+}
+.inner .container-fluid,
+.inner .row,
+.inner [class*="col-"],
+.inner .static,
+.inner .static * {
+  pointer-events: none;
+}
+.inner .scroll {
+  pointer-events: auto;
 }
 @media only screen and (min-width: 1200px) {
   .inner {
