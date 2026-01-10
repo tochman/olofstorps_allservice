@@ -55,12 +55,16 @@ export class Navigation {
     if (menuToggle && menu) {
       menuToggle.addEventListener('click', () => {
         menu.classList.add('is-open');
+        menuToggle.style.display = 'none';
       });
     }
     
     if (menuClose && menu) {
       menuClose.addEventListener('click', () => {
         menu.classList.remove('is-open');
+        if (menuToggle) {
+          menuToggle.style.display = 'flex';
+        }
       });
     }
     
@@ -69,6 +73,9 @@ export class Navigation {
     navLinks?.forEach(link => {
       link.addEventListener('click', () => {
         menu.classList.remove('is-open');
+        if (menuToggle) {
+          menuToggle.style.display = 'flex';
+        }
       });
     });
   }
