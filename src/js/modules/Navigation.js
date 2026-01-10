@@ -87,7 +87,7 @@ export class Navigation {
     console.log(`Opening section: ${sectionKey}`, section);
     
     if (section) {
-      section.classList.add('active');
+      section.classList.add('is-visible');
       document.body.style.overflow = 'hidden';
     } else {
       console.error(`Section not found: ${sectionKey}`);
@@ -99,7 +99,7 @@ export class Navigation {
     console.log(`Closing section: ${sectionKey}`, section);
     
     if (section) {
-      section.classList.remove('active');
+      section.classList.remove('is-visible');
       document.body.style.overflow = '';
     }
   }
@@ -140,4 +140,5 @@ export class Navigation {
   }
 }
 
-export default new Navigation();
+const navigationInstance = new Navigation();
+export default navigationInstance;
