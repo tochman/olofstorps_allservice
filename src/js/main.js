@@ -42,9 +42,9 @@ class App {
     
     // Initialize effects
     this.initializeEffects();
-    Initialize Leaflet map
-    this.initializeMap
-    this.loadGoogleMaps();
+    
+    // Initialize Leaflet map
+    this.initializeMap();
     
     console.log('✅ Application initialized successfully!');
   }

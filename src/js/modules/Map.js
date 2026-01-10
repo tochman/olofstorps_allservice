@@ -23,6 +23,8 @@ export class Map {
       return;
     }
 
+    console.log('🗺️ Initializing Leaflet map on container:', container);
+
     // Show the map container
     const mapWrapper = container.closest('.map');
     if (mapWrapper) {
@@ -30,7 +32,11 @@ export class Map {
     }
 
     // Initialize Leaflet map
-    this.map = L.map(this.containerId).setView(this.options.center, this.options.zoom);
+    this.map = L.map(this.containerId, {
+      center: this.options.center,
+      zoom: this.options.zoom,
+      zoomControl: false // We'll use custom controls
+    });
 
     // Add grayscale tile layer
     L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
@@ -45,6 +51,13 @@ export class Map {
 
     // Setup zoom controls
     this.setupZoomControls();
+
+    // Force map to resize after a short delay to ensure container is visible
+    setTimeout(() => {
+      if (this.map) {
+        this.map.invalidateSize();
+      }
+    }, 100);
 
     console.log('✅ Leaflet map initialized');
   }
