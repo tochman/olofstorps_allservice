@@ -10,22 +10,10 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
     emptyOutDir: true,
-    sourcemap: true,
+    sourcemap: false,
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-      },
-      output: {
-        manualChunks: {
-          vendor: ['animejs'],
-        },
-      },
-    },
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
       },
     },
   },
