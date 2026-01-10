@@ -103,10 +103,31 @@ class App {
     // Kenburns background effect
     this.initKenburns();
     
+    // Gallery/PhotoSwipe
+    this.initGallery();
+    
     // Particles.js if element exists
     const particlesElement = document.querySelector('#particles-js');
     if (particlesElement) {
       this.initParticles();
+    }
+  }
+  
+  initGallery() {
+    // Check if PhotoSwipe is loaded
+    if (typeof PhotoSwipe === 'undefined' || typeof PhotoSwipeUI_Default === 'undefined') {
+      console.log('⚠️ PhotoSwipe not loaded, skipping gallery initialization');
+      return;
+    }
+    
+    const galleryElements = document.querySelectorAll('.my-gallery');
+    if (galleryElements.length === 0) return;
+    
+    console.log('🖼️ Initializing PhotoSwipe gallery');
+    
+    // Use the existing gallery-init.js function
+    if (typeof initPhotoSwipeFromDOM !== 'undefined') {
+      initPhotoSwipeFromDOM('.my-gallery');
     }
   }
   

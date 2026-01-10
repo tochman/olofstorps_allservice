@@ -1918,6 +1918,9 @@ form .inputs-description {
   .works.is-visible {
     z-index: 10;
   }
+  .works.is-animating-out {
+    z-index: 10;
+  }
   .works.is-visible .works__gallery {
     -webkit-transform: translateY(0);
        -moz-transform: translateY(0);
