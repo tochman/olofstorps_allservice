@@ -1,0 +1,82 @@
+/**
+ * Leaflet Map Styles
+ */
+
+/* Grayscale tile filter */
+.leaflet-tile {
+  filter: grayscale(100%) brightness(0.95);
+}
+
+/* Map container */
+#google-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* Zoom controls styling */
+#zoom-in,
+#zoom-out {
+  position: absolute;
+  right: 2rem;
+  width: 4rem;
+  height: 4rem;
+  background: rgba(255, 255, 255, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  border: 1px solid #ddd;
+  transition: all 0.3s ease;
+  pointer-events: auto !important;
+}
+
+#zoom-in {
+  top: 2rem;
+  border-radius: 4px 4px 0 0;
+}
+
+#zoom-out {
+  top: 6rem;
+  border-radius: 0 0 4px 4px;
+  border-top: none;
+}
+
+#zoom-in:hover,
+#zoom-out:hover {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+#zoom-in .material-icons,
+#zoom-out .material-icons {
+  color: #333;
+  font-size: 2rem;
+  pointer-events: none;
+}
+
+/* Leaflet popup customization */
+.leaflet-popup-content-wrapper {
+  border-radius: 4px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.leaflet-popup-content {
+  margin: 1rem;
+  line-height: 1.4;
+}
+
+.leaflet-popup-content b {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+/* Hide default Leaflet attribution (we'll add it elsewhere if needed) */
+.leaflet-control-attribution {
+  font-size: 0.7rem;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 0.2rem 0.5rem;
+}

@@ -6,12 +6,14 @@
 import '../css/loaders/loader-monochrome.css';
 import '../css/plugins.css';
 import '../css/main.css';
+import '../css/map.css';
 
 import { ready } from './utils/dom.js';
 import loader from './modules/Loader.js';
 import navigation from './modules/Navigation.js';
 import templateEngine from './modules/TemplateEngine.js';
 import FormHandler from './modules/FormHandler.js';
+import Map from './modules/Map.js';
 
 class App {
   constructor() {
@@ -20,6 +22,7 @@ class App {
       formName: import.meta.env.VITE_FORM_NAME || 'site-contact-form',
       adminEmail: import.meta.env.VITE_ADMIN_EMAIL || 'info@olofstorps.se'
     };
+    this.map = null;
   }
   
   async init() {
@@ -39,8 +42,8 @@ class App {
     
     // Initialize effects
     this.initializeEffects();
-    
-    // Load Google Maps
+    Initialize Leaflet map
+    this.initializeMap
     this.loadGoogleMaps();
     
     console.log('✅ Application initialized successfully!');
@@ -211,136 +214,13 @@ class App {
     console.log('ℹ️  Particles.js initialization skipped');
   }
   
-  loadGoogleMaps() {
-    const mapElement = document.querySelector('#map');
-    if (!mapElement) return;
-    
-    console.log('🗺️  Loading Google Maps...');
-    
-    // Dynamically load Google Maps API
-    const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${this.config.googleMapsApiKey}&callback=initMap`;
-    script.async = true;
-    script.defer = true;
-    
-    // Define callback
-    window.initMap = () => {
-      console.log('✅ Google Maps loaded');
-      this.initializeMap();
-    };
-    
-    document.head.appendChild(script);
-  }
-  
   initializeMap() {
-    const mapElement = document.querySelector('#map');
-    if (!mapElement || !window.google) return;
-    
-    const coordinates = { lat: 57.7089, lng: 11.9746 }; // Göteborg area
-    
-    const map = new google.maps.Map(mapElement, {
-      center: coordinates,
-      zoom: 12,
-      styles: this.getMapStyles()
+    console.log('🗺️ Initializing Leaflet map...');
+    this.map = new Map('google-container', {
+      center: [57.7505, 12.2908], // Stora Älsjövägen 44, 424 70 Olofstorp
+      zoom: 15
     });
-    
-    new google.maps.Marker({
-      position: coordinates,
-      map: map,
-      title: 'Olofstorp Allservice'
-    });
-  }
-  
-  getMapStyles() {
-    // Monochrome map style
-    return [
-      {
-        "elementType": "geometry",
-        "stylers": [{ "color": "#f5f5f5" }]
-      },
-      {
-        "elementType": "labels.icon",
-        "stylers": [{ "visibility": "off" }]
-      },
-      {
-        "elementType": "labels.text.fill",
-        "stylers": [{ "color": "#616161" }]
-      },
-      {
-        "elementType": "labels.text.stroke",
-        "stylers": [{ "color": "#f5f5f5" }]
-      },
-      {
-        "featureType": "administrative.land_parcel",
-        "elementType": "labels.text.fill",
-        "stylers": [{ "color": "#bdbdbd" }]
-      },
-      {
-        "featureType": "poi",
-        "elementType": "geometry",
-        "stylers": [{ "color": "#eeeeee" }]
-      },
-      {
-        "featureType": "poi",
-        "elementType": "labels.text.fill",
-        "stylers": [{ "color": "#757575" }]
-      },
-      {
-        "featureType": "poi.park",
-        "elementType": "geometry",
-        "stylers": [{ "color": "#e5e5e5" }]
-      },
-      {
-        "featureType": "poi.park",
-        "elementType": "labels.text.fill",
-        "stylers": [{ "color": "#9e9e9e" }]
-      },
-      {
-        "featureType": "road",
-        "elementType": "geometry",
-        "stylers": [{ "color": "#ffffff" }]
-      },
-      {
-        "featureType": "road.arterial",
-        "elementType": "labels.text.fill",
-        "stylers": [{ "color": "#757575" }]
-      },
-      {
-        "featureType": "road.highway",
-        "elementType": "geometry",
-        "stylers": [{ "color": "#dadada" }]
-      },
-      {
-        "featureType": "road.highway",
-        "elementType": "labels.text.fill",
-        "stylers": [{ "color": "#616161" }]
-      },
-      {
-        "featureType": "road.local",
-        "elementType": "labels.text.fill",
-        "stylers": [{ "color": "#9e9e9e" }]
-      },
-      {
-        "featureType": "transit.line",
-        "elementType": "geometry",
-        "stylers": [{ "color": "#e5e5e5" }]
-      },
-      {
-        "featureType": "transit.station",
-        "elementType": "geometry",
-        "stylers": [{ "color": "#eeeeee" }]
-      },
-      {
-        "featureType": "water",
-        "elementType": "geometry",
-        "stylers": [{ "color": "#c9c9c9" }]
-      },
-      {
-        "featureType": "water",
-        "elementType": "labels.text.fill",
-        "stylers": [{ "color": "#9e9e9e" }]
-      }
-    ];
+    this.map.init();
   }
 }
 

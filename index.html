@@ -615,19 +615,19 @@
 
           <!-- Contact Media Map Static (on Desktop) Start -->
           <div class="col-12 col-xl-6 static fullheight contact__map">
-            <!-- Google Map Start -->
-            <div class="map" style="display: none;">
+            <!-- Leaflet Map Start -->
+            <div class="map">
               <div id="google-map">
-                <div id="google-container"></div>
-                <div id="zoom-in">
+                <div id="google-container" style="width: 100%; height: 100%;"></div>
+                <div id="zoom-in" style="display: flex;">
                   <span class="material-icons">add</span>
                 </div>
-                <div id="zoom-out">
+                <div id="zoom-out" style="display: flex;">
                   <span class="material-icons">remove</span>
                 </div>
               </div>
             </div>
-            <!-- Google Map End -->
+            <!-- Leaflet Map End -->
           </div>
           <!-- Contact Media Map Static (on Desktop) End -->
         </div>
