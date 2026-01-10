@@ -1,6 +1,9 @@
 [build]
   command = "npm run build && mkdir -p dist/js && cp js/libs.min.js js/gallery-init.js dist/js/"
   publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
   
 [[redirects]]
   from = "/*"
