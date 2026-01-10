@@ -1,0 +1,46 @@
+{
+  "name": "olofstorps-allservice",
+  "version": "2.0.0",
+  "description": "Olofstorp Allservice - Modern construction company website",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .js --fix",
+    "format": "prettier --write \"src/**/*.{js,css,html}\""
+  },
+  "dependencies": {
+    "animejs": "^3.2.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.13.0",
+    "prettier": "^3.4.2",
+    "vite": "^6.4.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "construction",
+    "renovation",
+    "sweden",
+    "göteborg",
+    "rot-avdrag"
+  ],
+  "author": "Olofstorp Allservice",
+  "license": "UNLICENSED",
+  "private": true,
+  "main": "eslint.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tochman/olofstorps_allservice.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tochman/olofstorps_allservice/issues"
+  },
+  "homepage": "https://github.com/tochman/olofstorps_allservice#readme"
+}

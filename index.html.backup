@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="sv" dir="ltr">
+<html lang="en" dir="ltr">
   <head>
+    <script src="js/libs.js"></script>
     <meta charset="utf-8" />
 
     <!-- Page Title-->
     <title>Olofstorp Allservice</title>
 
     <!-- Meta Tags-->
-    <meta name="description" content="Olofstorp Allservice - Professionellt byggföretag i Göteborg" />
+    <meta name="description" content="Olofstorp Allservice" />
     <meta
       name="keywords"
       content="bygg, renovering, Olofstorp, Gunnilse, Göteborg, ROT, Allservice, markarbete, dränering"
     />
-    <meta name="author" content="Olofstorp Allservice" />
+    <meta name="author" content="Craft Academy Labs" />
 
     <!-- Viewport Meta-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -22,17 +23,17 @@
     />
 
     <!-- Template Favicon & Icons Start -->
-    <link rel="icon" href="/img/favicon/monochrome/favicon.ico" sizes="any" />
+    <link rel="icon" href="img/favicon/monochrome/favicon.ico" sizes="any" />
     <link
       rel="icon"
-      href="/img/favicon/monochrome/icon.svg"
+      href="img/favicon/monochrome/icon.svg"
       type="image/svg+xml"
     />
     <link
       rel="apple-touch-icon"
-      href="/img/favicon/monochrome/apple-touch-icon.png"
+      href="img/favicon/monochrome/apple-touch-icon.png"
     />
-    <link rel="manifest" href="/img/favicon/monochrome/manifest.webmanifest" />
+    <link rel="manifest" href="img/favicon/monochrome/manifest.webmanifest" />
     <!-- Template Favicon & Icons End -->
 
     <!-- Facebook Metadata Start -->
@@ -48,8 +49,23 @@
     /> -->
     <!-- Facebook Metadata End -->
 
-    <!-- Vite will inject CSS automatically -->
-    
+    <!-- Template Styles Start -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="css/loaders/loader-monochrome.css"
+    />
+    <link rel="stylesheet" type="text/css" href="css/plugins.css" />
+    <!-- Template Styles End -->
+
+    <!-- Preload Templates for Better Performance -->
+    <link rel="preload" href="templates/project1.hbs" as="fetch" crossorigin />
+    <link rel="preload" href="templates/project2.hbs" as="fetch" crossorigin />
+    <link rel="preload" href="templates/project3.hbs" as="fetch" crossorigin />
+    <link rel="preload" href="templates/project4.hbs" as="fetch" crossorigin="anonymous" />
+    <link rel="preload" href="templates/project5.hbs" as="fetch" crossorigin="anonymous" />
+    <!-- Template Styles End -->
+
     <!-- Custom Browser Color Start -->
     <meta name="theme-color" content="#24262b" />
     <meta name="msapplication-navbutton-color" content="#24262b" />
@@ -647,75 +663,7 @@
         <!-- Contact Form Section Title End -->
 
         <!-- Contact Form Block Start -->
-        <div class="blocks__single">
-          <div class="form-container">
-            <!-- Reply Group Start -->
-            <div class="reply-group">
-              <span class="material-icons txt-light">
-                done
-              </span>
-              <p class="reply-group__title txt-light">
-                <span>Done</span>!
-              </p>
-              <span class="reply-group__text txt-light-transparent">
-                Tack för ditt meddelande. Vi återkommer till dig snarast.
-              </span>
-            </div>
-            <!-- Reply Group End -->
-            
-            <!-- Contact Form Start -->
-            <form
-              class="form form-light contact-form"
-              id="contact-form"
-              name="site-contact-form"
-              method="POST"
-              data-netlify="true"
-              netlify-honeypot="bot-field"
-            >
-              <!-- Hidden Fields for Netlify -->
-              <input type="hidden" name="form-name" value="site-contact-form" />
-              <input type="hidden" name="bot-field" />
-              
-              <div class="container-fluid p-0">
-                <div class="row gx-5">
-                  <div class="col-12 col-md-6">
-                    <input type="text" name="name" placeholder="Ditt namn*" required />
-                  </div>
-                  <div class="col-12 col-md-6">
-                    <input type="text" name="company" placeholder="Företag" />
-                  </div>
-                  <div class="col-12 col-md-6">
-                    <input type="email" name="email" placeholder="Email*" required />
-                  </div>
-                  <div class="col-12 col-md-6">
-                    <input type="tel" name="phone" placeholder="Telefonnummer*" required />
-                  </div>
-                  <div class="col-12">
-                    <textarea
-                      name="message"
-                      placeholder="Eventuellt meddelande"
-                    ></textarea>
-                  </div>
-                  <div class="col-12">
-                    <span class="inputs-description text-s">
-                      * Obligatoriska fält
-                    </span>
-                  </div>
-                  <div class="col-12">
-                    <button type="submit" class="button button-l button-light-outline">
-                      <span class="button-caption">Skicka meddelande</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </form>
-            <!-- Contact Form End -->
-          </div>
-        </div>
         <!-- Contact Form Block End -->
-      </div>
-    </div>
-    <!-- Contact Form Section End -->
 
     <!-- Notify Section Start -->
     <div class="popup notify">
@@ -831,7 +779,39 @@
       </div>
     </div>
 
-    <!-- Vite will inject scripts automatically -->
-    <script type="module" src="/src/js/main.js"></script>
+    <!-- Load Scripts Start -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
+      integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"
+      integrity="sha512-Yk47FuYNtuINE1w+t/KT4BQ7JaycTCcrvlSvdK/jry6Kcxqg5vN7/svVWCxZykVzzJHaxXk5T9jnFemZHSYgnw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="js/gallery-init.js"></script>
+    <script src="js/ramio-custom.js"></script>
+    <script src="js/template-loader.js"></script>
+    <script src="js/maps/map-monochrome.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4slvWy8btLEoMcdrtVw0T3ZPX47vunN4"></script>
+    <!-- Load Scripts End -->
+    <script>
+      // Initialize templates - loads all projects in parallel
+      $(function() {
+        TemplateLoader.initializeProjectTemplates()
+          .then(loaded => {
+            console.log('All templates loaded successfully');
+            // Trigger any post-load initialization if needed
+            $(window).trigger('templatesLoaded');
+          })
+          .catch(error => {
+            console.error('Template loading error:', error);
+          });
+      });
+    </script>
   </body>
 </html>
