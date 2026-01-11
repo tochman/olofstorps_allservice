@@ -53,6 +53,7 @@ export class Navigation {
     this.sections = {
       about: document.getElementById('about'),
       works: document.getElementById('works'),
+      history: document.getElementById('history'),
       contact: document.getElementById('contact'),
       writealine: document.querySelector('.writealine'),
       notify: document.querySelector('.popup.notify') // Legacy notify popup - we need to keep it hidden
@@ -61,6 +62,7 @@ export class Navigation {
     this.closeButtons = {
       about: document.getElementById('about-close'),
       works: document.getElementById('works-close'),
+      history: document.getElementById('history-close'),
       contact: document.getElementById('contact-close'),
       writealine: document.getElementById('writealine-close')
     };
@@ -73,9 +75,11 @@ export class Navigation {
     // Trigger buttons
     this.aboutTrigger = document.getElementById('about-trigger');
     this.worksTrigger = document.getElementById('works-trigger');
+    this.historyTrigger = document.getElementById('history-trigger');
     this.contactTrigger = document.getElementById('contact-trigger');
     this.notifyTrigger = document.getElementById('notify-trigger'); // Main page "Kontakta oss"
     this.contactformTrigger = document.getElementById('contactform-trigger'); // Contact section "Kontakta oss"
+    this.historyContactTrigger = document.getElementById('history-contact-trigger'); // History section "Kontakta oss"
     
     this.bindEvents();
     this.setupScrollHandling();
@@ -145,6 +149,12 @@ export class Navigation {
       this.openSection('works');
     });
     
+    this.historyTrigger?.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.closeMobileMenu();
+      this.openSection('history');
+    });
+    
     this.contactTrigger?.addEventListener('click', (e) => {
       e.preventDefault();
       this.closeMobileMenu();
@@ -162,6 +172,11 @@ export class Navigation {
       this.openPopup();
     });
     
+    this.historyContactTrigger?.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.openPopup();
+    });
+    
     // Close buttons
     this.closeButtons.about?.addEventListener('click', (e) => {
       e.preventDefault();
@@ -171,6 +186,11 @@ export class Navigation {
     this.closeButtons.works?.addEventListener('click', (e) => {
       e.preventDefault();
       this.closeSection('works');
+    });
+    
+    this.closeButtons.history?.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.closeSection('history');
     });
     
     this.closeButtons.contact?.addEventListener('click', (e) => {

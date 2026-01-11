@@ -113,6 +113,9 @@ class App {
     // Kenburns background effect
     this.initKenburns();
     
+    // History section kenburns
+    this.initHistoryKenburns();
+    
     // Gallery/PhotoSwipe
     this.initGallery();
     
@@ -145,11 +148,16 @@ class App {
     const kenburnsElement = document.querySelector('#bgndKenburns');
     if (!kenburnsElement) return;
     
-    // Using actual project images for the background slideshow
+    // Fresh 2026 project images for the background slideshow
     const images = [
-      '/img/olofstorps/exterior_house_1.jpg',
-      '/img/olofstorps/exterior_house_2.jpg',
-      '/img/olofstorps/fasad_2.jpg'
+      '/img/2026/project_1.jpg',
+      '/img/2026/project_2.jpg',
+      '/img/2026/project_3.jpg',
+      '/img/2026/project_4.jpg',
+      '/img/2026/project_5.jpg',
+      '/img/2026/project_6.jpg',
+      '/img/2026/project_7.jpg',
+      '/img/2026/project_8.jpg'
     ];
     
     // Create two layers
@@ -188,6 +196,85 @@ class App {
       const scale = 1 + (maxScale - 1) * eased;
       
       // Apply to active layer only
+      activeLayer.style.transform = `scale(${scale})`;
+      
+      requestAnimationFrame(animate);
+    };
+    
+    animate();
+    
+    // Change images
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % images.length;
+      
+      // Prepare inactive layer
+      inactiveLayer.style.backgroundImage = `url(${images[currentIndex]})`;
+      inactiveLayer.style.transform = 'scale(1)';
+      
+      // Crossfade
+      inactiveLayer.style.opacity = '1';
+      activeLayer.style.opacity = '0';
+      
+      // Swap layers
+      [activeLayer, inactiveLayer] = [inactiveLayer, activeLayer];
+      
+      // Reset timer for new zoom
+      startTime = Date.now();
+    }, duration);
+  }
+  
+  initHistoryKenburns() {
+    const kenburnsElement = document.querySelector('#historyKenburns');
+    if (!kenburnsElement) return;
+    
+    console.log('🖼️ Initializing History section kenburns effect');
+    
+    // Fresh 2026 work images for history section
+    const images = [
+      '/img/2026/work_1.jpg',
+      '/img/2026/work_2.jpg',
+      '/img/2026/work_3.jpg',
+      '/img/2026/work_4.jpg',
+      '/img/2026/work_5.jpg'
+    ];
+    
+    // Create two layers for crossfade
+    const layer1 = document.createElement('div');
+    const layer2 = document.createElement('div');
+    
+    const layerStyles = {
+      position: 'absolute',
+      top: '0',
+      left: '0',
+      width: '100%',
+      height: '100%',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      transition: 'opacity 1s ease-in-out'
+    };
+    
+    Object.assign(layer1.style, layerStyles);
+    Object.assign(layer2.style, layerStyles);
+    
+    layer1.style.backgroundImage = `url(${images[0]})`;
+    layer2.style.backgroundImage = `url(${images[1]})`;
+    layer2.style.opacity = '0';
+    
+    kenburnsElement.appendChild(layer1);
+    kenburnsElement.appendChild(layer2);
+    
+    // Ken Burns animation
+    let currentIndex = 0;
+    let activeLayer = layer1;
+    let inactiveLayer = layer2;
+    const duration = 5000;
+    let startTime = Date.now();
+    
+    const animate = () => {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const scale = 1 + (progress * 0.2);
+      
       activeLayer.style.transform = `scale(${scale})`;
       
       requestAnimationFrame(animate);
