@@ -127,11 +127,11 @@
 }
 
 .project-bg-2 {
-  background-image: url("/img/olofstorps/projects/project_2/project_2_2.jpg");
+  background-image: url("/img/olofstorps/projects/project_5/project_5_1.jpg");
 }
 
 .blockquote-project-2 {
-  background-image: url("/img/olofstorps/projects/project_2/project_2_2.jpg");
+  background-image: url("/img/olofstorps/projects/project_5/project_5_1.jpg");
 }
 
 .project-2-0 {
@@ -143,7 +143,7 @@
 }
 
 .project-2-2 {
-  background-image: url("/img/olofstorps/projects/project_2/project_2_2.jpg");
+  background-image: url("/img/olofstorps/projects/project_5/project_5_1.jpg");
 }
 
 .project-bg-3 {
@@ -1487,6 +1487,9 @@ body.menu-open .mobile-menu-toggle {
 
 .intro__menu {
   display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
@@ -1495,16 +1498,9 @@ body.menu-open .mobile-menu-toggle {
   background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
   z-index: 99;
   padding: 8rem 2rem 4rem;
-  opacity: 0;
-  transition: opacity 0.3s ease;
 }
 .intro__menu.is-open {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  opacity: 1;
-  animation: fadeInMenu 0.3s ease;
 }
 @keyframes fadeInMenu {
   from {
@@ -1527,16 +1523,16 @@ body.menu-open .mobile-menu-toggle {
   padding: 1.5rem 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   opacity: 0;
-  animation: fadeInMenuItem 0.4s ease forwards;
+  animation: fadeInMenuItem 0.25s ease forwards;
 }
 .intro__menu.is-open ul li:nth-child(1) {
-  animation-delay: 0.1s;
+  animation-delay: 0.05s;
 }
 .intro__menu.is-open ul li:nth-child(2) {
-  animation-delay: 0.2s;
+  animation-delay: 0.1s;
 }
 .intro__menu.is-open ul li:nth-child(3) {
-  animation-delay: 0.3s;
+  animation-delay: 0.15s;
 }
 .intro__menu.is-open ul li:first-child {
   border-top: 1px solid rgba(0, 0, 0, 0.05);
@@ -1564,7 +1560,7 @@ body.menu-open .mobile-menu-toggle {
 }
 @media only screen and (min-width: 1400px) {
   .intro__menu {
-    display: block;
+    display: flex !important;
     position: absolute;
     top: 4.8rem;
     left: auto;
@@ -1574,29 +1570,24 @@ body.menu-open .mobile-menu-toggle {
     background: transparent;
     padding: 0;
     z-index: auto;
-    opacity: 1;
-    animation: none;
   }
-  .intro__menu.is-open {
-    display: block;
-    animation: none;
-  }
-  .intro__menu.is-open ul {
+  .intro__menu ul {
+    display: flex !important;
     flex-direction: row;
     max-width: none;
   }
-  .intro__menu.is-open ul li {
-    animation: none;
-    opacity: 1;
+  .intro__menu ul li {
+    animation: none !important;
+    opacity: 1 !important;
     border: none;
     padding: 0;
     margin-right: 32px;
   }
-  .intro__menu.is-open ul li a {
+  .intro__menu ul li a {
     font-size: 1.6rem;
     padding: 2.4rem 0;
   }
-  .intro__menu.is-open ul li a:hover {
+  .intro__menu ul li a:hover {
     transform: none;
   }
 }
@@ -3081,7 +3072,7 @@ body.menu-open .mobile-menu-toggle {
   width: 100%;
   height: 100%;
   overflow-y: auto;
-  z-index: 10;
+  z-index: 20;
   padding: 0;
   background-color: #24262b;
   opacity: 1;

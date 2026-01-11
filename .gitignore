@@ -50,6 +50,14 @@ node_modules
 
 # Build output
 dist
+*.backup
+
+# Logs
+*.log
+npm-debug.log*
+
+# Build output
+dist
 *.local
 
 # Logs

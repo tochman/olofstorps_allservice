@@ -1,209 +1,297 @@
 /**
  * Navigation and Section Management
+ * 
+ * ===========================================
+ * STRUCTURE:
+ * ===========================================
+ * - Main page: Always visible as base layer
+ * - Sections (about, works, contact): Full-screen overlays
+ * - Popup (writealine): 50% width on desktop (right side), full screen on mobile
+ * 
+ * ===========================================
+ * USER JOURNEY - DESKTOP (≥1200px):
+ * ===========================================
+ * 1. Main page visible with horizontal menu
+ * 2. Click menu item → Section slides in (panels animate from top/bottom)
+ * 3. Click close → Section slides out
+ * 4. From contact section, click "Kontakta oss":
+ *    - Contact info panel slides UP and out
+ *    - Writealine slides UP from bottom (50% width, right side)
+ *    - Map stays visible on left
+ *    - Only popup close button visible
+ * 5. Close popup → Popup slides down, contact info slides back
+ * 
+ * ===========================================
+ * USER JOURNEY - MOBILE (<1200px):
+ * ===========================================
+ * 1. Main page visible with hamburger menu
+ * 2. Click hamburger → Full-screen menu appears
+ * 3. Click menu item → Menu closes, section opens full screen
+ * 4. Click "Kontakta oss" → Writealine opens full screen
+ * 5. Click close → Returns to previous view
+ * 
+ * ===========================================
+ * CSS CLASSES USED:
+ * ===========================================
+ * - .is-visible: Section/popup is open and visible
+ * - .is-open: Mobile menu is open
+ * - .popup-is-visible: Added to contact when popup opens (slides info panel out)
  */
-
-import { $, $$, addClass, removeClass, on } from '../utils/dom.js';
 
 export class Navigation {
   constructor() {
-    // Wait for DOM to be ready
-    this.sections = null;
-    this.triggers = null;
-    this.closeButtons = null;
+    this.sections = {};
+    this.closeButtons = {};
+    this.currentSection = null; // Track which section is currently open
   }
   
   init() {
-    // Initialize selectors after DOM is ready
-    this.sections = {
-      about: document.querySelector('#about'),
-      works: document.querySelector('#works'),
-      contact: document.querySelector('#contact'),
-      notify: document.querySelector('.notify'),
-      writealine: document.querySelector('.writealine')
-    };
+    // Remove any legacy jQuery handlers first
+    this.removeLegacyHandlers();
     
-    this.triggers = {
-      about: document.querySelector('#about-trigger'),
-      works: document.querySelector('#works-trigger'),
-      contact: document.querySelector('#contact-trigger'),
-      notify: document.querySelector('#notify-trigger'),
-      contactform: document.querySelector('#contactform-trigger'),
-      notifyMain: document.querySelector('#notify-trigger') // Main hero button
+    // Cache DOM elements
+    this.sections = {
+      about: document.getElementById('about'),
+      works: document.getElementById('works'),
+      contact: document.getElementById('contact'),
+      writealine: document.querySelector('.writealine'),
+      notify: document.querySelector('.popup.notify') // Legacy notify popup - we need to keep it hidden
     };
     
     this.closeButtons = {
-      about: document.querySelector('#about-close'),
-      works: document.querySelector('#works-close'),
-      contact: document.querySelector('#contact-close'),
-      notify: document.querySelector('#notify-close'),
-      writealine: document.querySelector('#writealine-close')
+      about: document.getElementById('about-close'),
+      works: document.getElementById('works-close'),
+      contact: document.getElementById('contact-close'),
+      writealine: document.getElementById('writealine-close')
     };
     
-    console.log('Navigation initialized with triggers:', this.triggers);
+    // Mobile menu elements
+    this.menuToggle = document.getElementById('mobile-menu-toggle');
+    this.menuClose = document.getElementById('mobile-menu-close');
+    this.menu = document.getElementById('intro-menu');
     
-    // Ensure all sections start closed (remove any is-visible classes)
-    Object.keys(this.sections).forEach(key => {
-      const section = this.sections[key];
-      if (section && section.classList.contains('is-visible')) {
-        console.warn(`Section ${key} has is-visible class on init - removing it`);
-        section.classList.remove('is-visible');
-      }
-    });
+    // Trigger buttons
+    this.aboutTrigger = document.getElementById('about-trigger');
+    this.worksTrigger = document.getElementById('works-trigger');
+    this.contactTrigger = document.getElementById('contact-trigger');
+    this.notifyTrigger = document.getElementById('notify-trigger'); // Main page "Kontakta oss"
+    this.contactformTrigger = document.getElementById('contactform-trigger'); // Contact section "Kontakta oss"
     
-    this.setupTriggers();
-    this.setupCloseButtons();
-    this.setupMobileMenu();
+    this.bindEvents();
     this.setupScrollHandling();
+    
+    console.log('Navigation initialized');
   }
   
-  setupMobileMenu() {
-    const menuToggle = document.querySelector('#mobile-menu-toggle');
-    const menuClose = document.querySelector('#mobile-menu-close');
-    const menu = document.querySelector('#intro-menu');
-    
-    if (menuToggle && menu) {
-      menuToggle.addEventListener('click', () => {
-        menu.classList.add('is-open');
-        menuToggle.style.display = 'none';
-      });
+  /**
+   * Remove legacy jQuery event handlers that conflict with our vanilla JS
+   * The libs.min.js file contains jQuery handlers for navigation that we need to disable
+   */
+  removeLegacyHandlers() {
+    // If jQuery is loaded, unbind its handlers
+    if (typeof window.jQuery !== 'undefined' || typeof window.$ !== 'undefined') {
+      const $ = window.jQuery || window.$;
+      
+      // Unbind all jQuery click handlers from trigger elements
+      $('#notify-trigger').off('click');
+      $('#contactform-trigger').off('click');
+      $('#about-trigger').off('click');
+      $('#works-trigger').off('click');
+      $('#contact-trigger').off('click');
+      $('#about-close').off('click');
+      $('#works-close').off('click');
+      $('#contact-close').off('click');
+      $('#notify-close').off('click');
+      $('#writealine-close').off('click');
+      $('#mobile-menu-toggle').off('click');
+      $('#mobile-menu-close').off('click');
+      
+      // Clean up any classes the legacy code might have added
+      $('.main').removeClass('notify-is-visible');
+      $('.popup.notify').removeClass('is-visible');
+      
+      console.log('Legacy jQuery handlers removed');
     }
     
-    if (menuClose && menu) {
-      menuClose.addEventListener('click', () => {
-        menu.classList.remove('is-open');
-        if (menuToggle) {
-          menuToggle.style.display = 'flex';
-        }
-      });
+    // Also ensure the .notify popup (legacy newsletter) is always hidden
+    const notifyPopup = document.querySelector('.popup.notify');
+    if (notifyPopup) {
+      notifyPopup.classList.remove('is-visible');
     }
+  }
+  
+  bindEvents() {
+    // Mobile menu
+    this.menuToggle?.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.openMobileMenu();
+    });
     
-    // Close mobile menu when a nav link is clicked
-    const navLinks = menu?.querySelectorAll('a');
-    navLinks?.forEach(link => {
-      link.addEventListener('click', () => {
-        menu.classList.remove('is-open');
-        if (menuToggle) {
-          menuToggle.style.display = 'flex';
-        }
-      });
+    this.menuClose?.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.closeMobileMenu();
+    });
+    
+    // Section triggers
+    this.aboutTrigger?.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.closeMobileMenu();
+      this.openSection('about');
+    });
+    
+    this.worksTrigger?.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.closeMobileMenu();
+      this.openSection('works');
+    });
+    
+    this.contactTrigger?.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.closeMobileMenu();
+      this.openSection('contact');
+    });
+    
+    // Popup triggers - both open writealine
+    this.notifyTrigger?.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.openPopup();
+    });
+    
+    this.contactformTrigger?.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.openPopup();
+    });
+    
+    // Close buttons
+    this.closeButtons.about?.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.closeSection('about');
+    });
+    
+    this.closeButtons.works?.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.closeSection('works');
+    });
+    
+    this.closeButtons.contact?.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.closeSection('contact');
+    });
+    
+    this.closeButtons.writealine?.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.closePopup();
     });
   }
   
-  setupTriggers() {
-    Object.keys(this.triggers).forEach(key => {
-      const trigger = this.triggers[key];
-      
-      if (trigger) {
-        trigger.addEventListener('click', (e) => {
-          e.preventDefault();
-          console.log(`Trigger clicked: ${key}`);
-          
-          // Handle special cases - route to contact form popup
-          if (key === 'contactform' || key === 'notifyMain' || key === 'notify') {
-            this.openSection('writealine');
-          } else {
-            this.openSection(key);
-          }
-        });
-      } else {
-        console.warn(`Trigger not found: ${key}`);
-      }
-    });
+  // ==========================================
+  // MOBILE MENU
+  // ==========================================
+  
+  openMobileMenu() {
+    this.menu?.classList.add('is-open');
+    if (this.menuToggle) {
+      this.menuToggle.style.display = 'none';
+    }
   }
   
-  setupCloseButtons() {
-    Object.keys(this.closeButtons).forEach(key => {
-      const closeBtn = this.closeButtons[key];
-      
-      if (closeBtn) {
-        closeBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          console.log(`Close button clicked: ${key}`);
-          this.closeSection(key);
-        });
-      }
-    });
+  closeMobileMenu() {
+    this.menu?.classList.remove('is-open');
+    if (this.menuToggle) {
+      this.menuToggle.style.display = '';
+    }
   }
+  
+  // ==========================================
+  // SECTIONS (about, works, contact)
+  // ==========================================
   
   openSection(sectionKey) {
     const section = this.sections[sectionKey];
-    console.log(`Opening section: ${sectionKey}`, section);
-    console.log(`Section has is-visible: ${section?.classList.contains('is-visible')}`);
+    if (!section) return;
     
-    if (section) {
-      // Always remove first to ensure clean state
-      section.classList.remove('is-visible');
-      
-      // Check if any OTHER section is currently visible
-      const currentlyVisible = Object.keys(this.sections).find(key => 
-        key !== sectionKey && 
-        this.sections[key] && 
-        this.sections[key].classList.contains('is-visible')
-      );
-      
-      if (currentlyVisible) {
-        // A section is open, animate it out first then open the new one
-        console.log(`Closing ${currentlyVisible} before opening ${sectionKey}`);
-        this.closeSection(currentlyVisible);
-        
-        // Wait for close animation to complete (600ms as per CSS)
-        setTimeout(() => {
-          section.classList.add('is-visible');
-          
-          // Only lock body overflow for popups
-          if (sectionKey === 'notify' || sectionKey === 'writealine') {
-            document.body.style.overflow = 'hidden';
-          }
-        }, 650);
-      } else {
-        // No section open, just open the new one
-        section.classList.add('is-visible');
-        
-        // Only lock body overflow for popups
-        if (sectionKey === 'notify' || sectionKey === 'writealine') {
-          document.body.style.overflow = 'hidden';
-        }
+    // Close popup if open
+    this.closePopup();
+    
+    // Close any other open section first
+    if (this.currentSection && this.currentSection !== sectionKey) {
+      const oldSection = this.sections[this.currentSection];
+      if (oldSection) {
+        oldSection.classList.remove('is-visible');
       }
-    } else {
-      console.error(`Section not found: ${sectionKey}`);
     }
+    
+    // Open the new section
+    section.classList.add('is-visible');
+    this.currentSection = sectionKey;
   }
   
   closeSection(sectionKey) {
     const section = this.sections[sectionKey];
-    console.log(`Closing section: ${sectionKey}`, section);
+    if (!section) return;
     
-    if (section) {
-      // Add animating-out class to trigger out animation while keeping z-index high
-      section.classList.add('is-animating-out');
-      section.classList.remove('is-visible');
-      document.body.style.overflow = '';
-      
-      // Remove animating-out class after animation completes
-      setTimeout(() => {
-        section.classList.remove('is-animating-out');
-      }, 600);
+    section.classList.remove('is-visible');
+    
+    if (this.currentSection === sectionKey) {
+      this.currentSection = null;
     }
   }
   
-  closeAllSections() {
-    Object.keys(this.sections).forEach(key => {
-      const section = this.sections[key];
-      if (section) {
-        section.classList.remove('is-visible');
+  // ==========================================
+  // POPUP (writealine contact form)
+  // ==========================================
+  
+  openPopup() {
+    const popup = this.sections.writealine;
+    if (!popup) return;
+    
+    // If contact section is open, add popup-is-visible class to slide info panel out
+    if (this.sections.contact?.classList.contains('is-visible')) {
+      this.sections.contact.classList.add('popup-is-visible');
+    }
+    
+    // Hide all section close buttons while popup is open
+    Object.keys(this.closeButtons).forEach(key => {
+      if (key !== 'writealine' && this.closeButtons[key]) {
+        this.closeButtons[key].style.display = 'none';
       }
     });
+    
+    // Open popup
+    popup.classList.add('is-visible');
+    document.body.style.overflow = 'hidden';
+  }
+  
+  closePopup() {
+    const popup = this.sections.writealine;
+    if (!popup || !popup.classList.contains('is-visible')) return;
+    
+    // Remove popup-is-visible from contact to slide info panel back
+    this.sections.contact?.classList.remove('popup-is-visible');
+    
+    // Restore section close buttons
+    Object.keys(this.closeButtons).forEach(key => {
+      if (key !== 'writealine' && this.closeButtons[key]) {
+        this.closeButtons[key].style.display = '';
+      }
+    });
+    
+    // Close popup
+    popup.classList.remove('is-visible');
     document.body.style.overflow = '';
   }
   
+  // ==========================================
+  // SCROLL HANDLING (for project backgrounds)
+  // ==========================================
+  
   setupScrollHandling() {
     const aboutInfo = document.querySelector('.about__info');
-    const projectBg = document.querySelector('#project-bg');
+    const projectBg = document.getElementById('project-bg');
     
-    if (!aboutInfo || !projectBg) {
-      console.log('Scroll handling elements not found');
-      return;
-    }
+    if (!aboutInfo || !projectBg) return;
+    
+    projectBg.classList.add('project-bg-1');
     
     const handleProjectScroll = () => {
       const projects = Array.from(document.querySelectorAll('#projects > div'));
@@ -213,20 +301,13 @@ export class Navigation {
         const isInView = rect.top < window.innerHeight / 2 && rect.bottom > window.innerHeight / 2;
         
         if (isInView) {
-          // Remove all project-bg classes
           projectBg.className = projectBg.className.replace(/project-bg-\d+/g, '');
-          // Add current project class
           projectBg.classList.add(`project-bg-${index + 1}`);
         }
       });
     };
     
-    // Setup scroll listener with custom scrollbar or native scroll
-    if (aboutInfo.classList.contains('scroll')) {
-      // If using custom scrollbar, listen to its scroll event
-      aboutInfo.addEventListener('scroll', handleProjectScroll);
-    }
-    
+    aboutInfo.addEventListener('scroll', handleProjectScroll);
     window.addEventListener('scroll', handleProjectScroll);
     window.addEventListener('resize', handleProjectScroll);
   }

@@ -8,6 +8,9 @@ import '../css/plugins.css';
 import '../css/main.css';
 import '../css/map.css';
 
+// Import gallery images to ensure they're bundled
+import './gallery-images.js';
+
 import { ready } from './utils/dom.js';
 import loader from './modules/Loader.js';
 import navigation from './modules/Navigation.js';
