@@ -10,6 +10,8 @@ export class Loader {
     this.logo = $('.loader-logo');
     this.caption = $('.loader-caption');
     this.main = $('#main');
+    // Add loading class to body initially
+    document.body.classList.add('loading');
   }
   
   hide() {
@@ -33,6 +35,8 @@ export class Loader {
       if (this.main) {
         addClass(this.main, 'loaded');
       }
+      // Remove loading class from body
+      document.body.classList.remove('loading');
     }, 1200);
   }
   

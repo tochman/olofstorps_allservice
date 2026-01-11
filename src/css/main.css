@@ -1441,6 +1441,12 @@ form .inputs-description {
 body.menu-open .mobile-menu-toggle {
   display: none !important;
 }
+/* Hide hamburger when loader is visible or popup is open */
+body.loading .mobile-menu-toggle,
+.writealine.is-visible ~ .mobile-menu-toggle,
+body.popup-open .mobile-menu-toggle {
+  display: none !important;
+}
 .mobile-menu-toggle:hover {
   background: #ffffff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -1526,6 +1532,13 @@ body.menu-open .mobile-menu-toggle {
   opacity: 0;
   animation: fadeInMenuItem 0.15s ease forwards;
 }
+/* Home item - hidden by default, shown when scrolled */
+.intro__menu.is-open ul li.home-item {
+  display: none;
+}
+body.scrolled-down .intro__menu.is-open ul li.home-item {
+  display: block;
+}
 .intro__menu.is-open ul li:nth-child(1) {
   animation-delay: 0s;
 }
@@ -1537,6 +1550,9 @@ body.menu-open .mobile-menu-toggle {
 }
 .intro__menu.is-open ul li:nth-child(4) {
   animation-delay: 0.09s;
+}
+.intro__menu.is-open ul li:nth-child(5) {
+  animation-delay: 0.12s;
 }
 .intro__menu.is-open ul li:first-child {
   border-top: 1px solid rgba(0, 0, 0, 0.05);

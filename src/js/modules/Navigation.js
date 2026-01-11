@@ -73,6 +73,7 @@ export class Navigation {
     this.menu = document.getElementById('intro-menu');
     
     // Mobile trigger buttons (inside mobile menu overlay)
+    this.homeTrigger = document.getElementById('home-trigger');
     this.aboutTrigger = document.getElementById('about-trigger');
     this.worksTrigger = document.getElementById('works-trigger');
     this.historyTrigger = document.getElementById('history-trigger');
@@ -91,6 +92,7 @@ export class Navigation {
     
     this.bindEvents();
     this.setupScrollHandling();
+    this.setupScrollDetection();
   }
   
   /**
@@ -138,6 +140,13 @@ export class Navigation {
     this.menuClose?.addEventListener('click', (e) => {
       e.preventDefault();
       this.closeMobileMenu();
+    });
+    
+    // Home trigger (scroll to top)
+    this.homeTrigger?.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.closeMobileMenu();
+      this.scrollToTop();
     });
     
     // Section triggers
@@ -271,6 +280,30 @@ export class Navigation {
     }, 100);
   }
   
+  scrollToTop() {
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+  }
+  
+  setupScrollDetection() {
+    // Track scroll position to show/hide "Hem" menu item
+    let lastScrollY = window.scrollY;
+    const threshold = 200; // Show "Hem" after scrolling 200px
+    
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY > threshold) {
+        document.body.classList.add('scrolled-down');
+      } else {
+        document.body.classList.remove('scrolled-down');
+      }
+      
+      lastScrollY = currentScrollY;
+    }, { passive: true });
+  }
+  
   // ==========================================
   // SECTIONS (about, works, contact)
   // ==========================================
@@ -329,6 +362,7 @@ export class Navigation {
     // Open popup
     popup.classList.add('is-visible');
     document.body.style.overflow = 'hidden';
+    document.body.classList.add('popup-open');
   }
   
   closePopup() {
@@ -348,6 +382,7 @@ export class Navigation {
     // Close popup
     popup.classList.remove('is-visible');
     document.body.style.overflow = '';
+    document.body.classList.remove('popup-open');
   }
   
   // ==========================================
