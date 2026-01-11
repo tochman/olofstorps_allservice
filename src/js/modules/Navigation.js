@@ -72,19 +72,25 @@ export class Navigation {
     this.menuClose = document.getElementById('mobile-menu-close');
     this.menu = document.getElementById('intro-menu');
     
-    // Trigger buttons
+    // Mobile trigger buttons (inside mobile menu overlay)
     this.aboutTrigger = document.getElementById('about-trigger');
     this.worksTrigger = document.getElementById('works-trigger');
     this.historyTrigger = document.getElementById('history-trigger');
     this.contactTrigger = document.getElementById('contact-trigger');
+    
+    // Desktop trigger buttons (inside main intro section)
+    this.aboutTriggerDesktop = document.querySelector('.about-trigger-desktop');
+    this.worksTriggerDesktop = document.querySelector('.works-trigger-desktop');
+    this.historyTriggerDesktop = document.querySelector('.history-trigger-desktop');
+    this.contactTriggerDesktop = document.querySelector('.contact-trigger-desktop');
+    
+    // Popup triggers
     this.notifyTrigger = document.getElementById('notify-trigger'); // Main page "Kontakta oss"
     this.contactformTrigger = document.getElementById('contactform-trigger'); // Contact section "Kontakta oss"
     this.historyContactTrigger = document.getElementById('history-contact-trigger'); // History section "Kontakta oss"
     
     this.bindEvents();
     this.setupScrollHandling();
-    
-    console.log('Navigation initialized');
   }
   
   /**
@@ -113,8 +119,6 @@ export class Navigation {
       // Clean up any classes the legacy code might have added
       $('.main').removeClass('notify-is-visible');
       $('.popup.notify').removeClass('is-visible');
-      
-      console.log('Legacy jQuery handlers removed');
     }
     
     // Also ensure the .notify popup (legacy newsletter) is always hidden
@@ -140,24 +144,45 @@ export class Navigation {
     this.aboutTrigger?.addEventListener('click', (e) => {
       e.preventDefault();
       this.closeMobileMenu();
-      this.openSection('about');
+      this.handleSectionNavigation('about');
     });
     
     this.worksTrigger?.addEventListener('click', (e) => {
       e.preventDefault();
       this.closeMobileMenu();
-      this.openSection('works');
+      this.handleSectionNavigation('works');
     });
     
     this.historyTrigger?.addEventListener('click', (e) => {
       e.preventDefault();
       this.closeMobileMenu();
-      this.openSection('history');
+      this.handleSectionNavigation('history');
     });
     
     this.contactTrigger?.addEventListener('click', (e) => {
       e.preventDefault();
       this.closeMobileMenu();
+      this.handleSectionNavigation('contact');
+    });
+    
+    // Desktop section triggers (always open as overlay on desktop)
+    this.aboutTriggerDesktop?.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.openSection('about');
+    });
+    
+    this.worksTriggerDesktop?.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.openSection('works');
+    });
+    
+    this.historyTriggerDesktop?.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.openSection('history');
+    });
+    
+    this.contactTriggerDesktop?.addEventListener('click', (e) => {
+      e.preventDefault();
       this.openSection('contact');
     });
     
@@ -208,6 +233,10 @@ export class Navigation {
   // MOBILE MENU
   // ==========================================
   
+  isMobile() {
+    return window.innerWidth < 1400;
+  }
+  
   openMobileMenu() {
     this.menu?.classList.add('is-open');
     if (this.menuToggle) {
@@ -220,6 +249,26 @@ export class Navigation {
     if (this.menuToggle) {
       this.menuToggle.style.display = '';
     }
+  }
+  
+  handleSectionNavigation(sectionKey) {
+    if (this.isMobile()) {
+      // On mobile, scroll to the section
+      this.scrollToSection(sectionKey);
+    } else {
+      // On desktop, open as overlay
+      this.openSection(sectionKey);
+    }
+  }
+  
+  scrollToSection(sectionKey) {
+    const section = this.sections[sectionKey];
+    if (!section) return;
+    
+    // Small delay to let mobile menu close animation complete
+    setTimeout(() => {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
   }
   
   // ==========================================

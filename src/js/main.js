@@ -29,8 +29,6 @@ class App {
   }
   
   async init() {
-    console.log('🚀 Initializing Olofstorp Allservice...');
-    
     // Load project templates
     await this.loadProjectTemplates();
     
@@ -48,13 +46,9 @@ class App {
     
     // Hide loader after initialization
     loader.hide();
-    
-    console.log('✅ Application initialized successfully!');
   }
   
   async loadProjectTemplates() {
-    console.log('📄 Loading project templates...');
-    
     const projects = [
       { name: 'project1', path: '/src/templates/project1.hbs', target: '#project1' },
       { name: 'project2', path: '/src/templates/project2.hbs', target: '#project2' },
@@ -65,17 +59,13 @@ class App {
     
     try {
       for (const project of projects) {
-        console.log(`Loading ${project.name} from ${project.path}...`);
         await templateEngine.loadAndRender(
           project.name,
           project.path,
           {},
           project.target
         );
-        const target = document.querySelector(project.target);
-        console.log(`${project.name} rendered. Content length:`, target?.innerHTML?.length || 0);
       }
-      console.log('✅ Templates loaded successfully');
       
       // Trigger event for any dependent code
       window.dispatchEvent(new CustomEvent('templatesLoaded'));
@@ -86,8 +76,6 @@ class App {
   }
   
   initializeForms() {
-    console.log('📝 Initializing forms...');
-    
     // Initialize contact form
     const contactForm = document.querySelector('#contact-form');
     if (contactForm) {
@@ -96,20 +84,16 @@ class App {
         errorMessage: 'Ett fel uppstod. Vänligen försök igen.',
         successDelay: 5000
       });
-      console.log('✅ Contact form initialized');
     }
     
     // Initialize notify form if exists
     const notifyForm = document.querySelector('.notify-form');
     if (notifyForm) {
       // Mailchimp integration would go here
-      console.log('✅ Notify form found');
     }
   }
   
   initializeEffects() {
-    console.log('✨ Initializing visual effects...');
-    
     // Kenburns background effect
     this.initKenburns();
     
@@ -129,14 +113,11 @@ class App {
   initGallery() {
     // Check if PhotoSwipe is loaded
     if (typeof PhotoSwipe === 'undefined' || typeof PhotoSwipeUI_Default === 'undefined') {
-      console.log('⚠️ PhotoSwipe not loaded, skipping gallery initialization');
       return;
     }
     
     const galleryElements = document.querySelectorAll('.my-gallery');
     if (galleryElements.length === 0) return;
-    
-    console.log('🖼️ Initializing PhotoSwipe gallery');
     
     // Use the existing gallery-init.js function
     if (typeof initPhotoSwipeFromDOM !== 'undefined') {
@@ -227,8 +208,6 @@ class App {
     const kenburnsElement = document.querySelector('#historyKenburns');
     if (!kenburnsElement) return;
     
-    console.log('🖼️ Initializing History section kenburns effect');
-    
     // Fresh 2026 work images for history section
     const images = [
       '/img/2026/work_1.jpg',
@@ -305,11 +284,9 @@ class App {
   initParticles() {
     // Particles.js initialization would go here
     // For now, we'll skip this as it's a heavy library
-    console.log('ℹ️  Particles.js initialization skipped');
   }
   
   initializeMap() {
-    console.log('🗺️ Initializing Leaflet map...');
     this.map = new Map('google-container', {
       center: [57.7505, 12.2908], // Stora Älsjövägen 44, 424 70 Olofstorp
       zoom: 15

@@ -34,8 +34,6 @@ export class Map {
       return;
     }
 
-    console.log('🗺️ Initializing Leaflet map on container:', container);
-
     // Show the map container
     const mapWrapper = container.closest('.map');
     if (mapWrapper) {
@@ -69,8 +67,6 @@ export class Map {
         this.map.invalidateSize();
       }
     }, 100);
-
-    console.log('✅ Leaflet map initialized');
   }
 
   setupZoomControls() {
