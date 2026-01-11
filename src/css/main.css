@@ -669,7 +669,7 @@ img {
   width: 100%;
   height: 100%;
   min-height: 100%;
-  background-color: transparent;
+  background-color: #1a1a1a;
   overflow: hidden;
 }
 
@@ -2278,6 +2278,7 @@ body.scrolled-down .intro__menu.is-open ul li.home-item {
 .history__photo {
   position: relative;
   overflow: hidden;
+  background-color: #1a1a1a;
 }
 
 #historyKenburns {
@@ -2287,6 +2288,7 @@ body.scrolled-down .intro__menu.is-open ul li.home-item {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  background-color: #1a1a1a;
 }
 
 @media only screen and (min-width: 768px) {
