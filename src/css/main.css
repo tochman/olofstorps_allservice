@@ -1415,6 +1415,7 @@ form .inputs-description {
   .intro__logo {
     top: 4.8rem;
     left: 8rem;
+    max-width: 200px;
   }
 }
 
@@ -1562,9 +1563,9 @@ body.menu-open .mobile-menu-toggle {
   .intro__menu {
     display: flex !important;
     position: absolute;
-    top: 4.8rem;
-    left: auto;
-    right: 8rem;
+    top: 10rem;
+    left: 8rem;
+    right: auto;
     width: auto;
     height: auto;
     background: transparent;
@@ -1584,8 +1585,8 @@ body.menu-open .mobile-menu-toggle {
     margin-right: 32px;
   }
   .intro__menu ul li a {
-    font-size: 1.6rem;
-    padding: 2.4rem 0;
+    font-size: 1.4rem;
+    padding: 1rem 0;
   }
   .intro__menu ul li a:hover {
     transform: none;
@@ -1608,9 +1609,15 @@ body.menu-open .mobile-menu-toggle {
 @media only screen and (min-width: 1400px) {
   .intro__socials {
     position: absolute;
-    right: auto;
+    left: auto;
+    right: 8rem;
     bottom: 4.8rem;
-    left: 8rem;
+  }
+  .intro__socials ul li a {
+    font-size: 3rem;
+  }
+  .intro__socials ul li a i {
+    font-size: 3rem;
   }
 }
 
@@ -1639,6 +1646,9 @@ body.menu-open .mobile-menu-toggle {
 @media only screen and (min-width: 1400px) {
   .intro__headline {
     padding: 0 8rem;
+    padding-top: 18rem;
+    top: 0;
+    transform: none;
   }
 }
 
