@@ -33,7 +33,7 @@ export class FormHandler {
   setupValidation() {
     if (!this.options.validateOnBlur) return;
     
-    const inputs = this.form.querySelectorAll('input, textarea, select');
+    const inputs = this.form.querySelectorAll('input:not([type="hidden"]), textarea, select');
     inputs.forEach(input => {
       input.addEventListener('blur', () => this.validateField(input));
       input.addEventListener('input', () => this.clearFieldError(input));
@@ -92,7 +92,7 @@ export class FormHandler {
   }
   
   validateForm() {
-    const inputs = this.form.querySelectorAll('input, textarea, select');
+    const inputs = this.form.querySelectorAll('input:not([type="hidden"]), textarea, select');
     let isValid = true;
     
     inputs.forEach(input => {
@@ -120,6 +120,14 @@ export class FormHandler {
     const formData = new FormData(this.form);
     const submitButton = this.form.querySelector('button[type="submit"]');
     
+    // Ensure form-name is always present for Netlify AJAX submissions.
+    // Netlify's post-processing may modify hidden fields, so we set it
+    // explicitly from the form's name attribute to guarantee it's included.
+    const formName = this.form.getAttribute('name');
+    if (formName) {
+      formData.set('form-name', formName);
+    }
+    
     // Disable submit button
     if (submitButton) {
       submitButton.disabled = true;
@@ -134,11 +142,25 @@ export class FormHandler {
         body: new URLSearchParams(formData).toString()
       });
       
-      if (response.ok) {
-        this.showSuccess();
-      } else {
-        throw new Error('Form submission failed');
+      if (!response.ok) {
+        throw new Error(`Form submission failed with status ${response.status}`);
       }
+      
+      // For Netlify forms, a successful submission returns a redirect (303)
+      // that fetch follows automatically. If the response was NOT redirected,
+      // Netlify likely did not process the form (the SPA rewrite served
+      // index.html instead). Warn in the console but still show success to
+      // avoid confusing end-users – submissions are also visible in the
+      // Netlify dashboard so the site owner can verify.
+      if (!response.redirected) {
+        console.warn(
+          'Form POST returned 200 without a redirect. ' +
+          'Netlify may not have processed the submission. ' +
+          'Check the Forms section in the Netlify dashboard.'
+        );
+      }
+      
+      this.showSuccess();
     } catch (error) {
       console.error('Form submission error:', error);
       this.showError();

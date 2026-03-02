@@ -21,40 +21,37 @@
       class="form form-light contact-form"
       id="contact-form"
       name="site-contact-form"
+      action="/"
       method="POST"
-      data-netlify="true" 
+      data-netlify="true"
+      netlify-honeypot="bot-field"
     >
-      <!-- Hidden Required Fields -->
-      <input
-        type="hidden"
-        name="project_name"
-        value="Olofstorps Allservice - Kontaktformulär"
-      />
-      <input type="hidden" name="admin_email" value="info@olofstorps.se" />
-      <input type="hidden" name="form_subject" value="Kontaktformulär" />
-      <!-- END Hidden Required Fields-->
+      <!-- Hidden Fields for Netlify -->
+      <input type="hidden" name="form-name" value="site-contact-form" />
+      <input type="hidden" name="bot-field" />
+
       <div class="container-fluid p-0">
         <div class="row gx-5">
           <div class="col-12 col-md-6">
-            <input type="text" name="Name" placeholder="Ditt namn*" required />
+            <input type="text" name="name" placeholder="Ditt namn*" required />
           </div>
           <div class="col-12 col-md-6">
-            <input type="text" name="Company" placeholder="Företag" />
+            <input type="text" name="company" placeholder="Företag" />
           </div>
           <div class="col-12 col-md-6">
-            <input type="email" name="E-mail" placeholder="Email*" required />
+            <input type="email" name="email" placeholder="Email*" required />
           </div>
           <div class="col-12 col-md-6">
             <input
               type="tel"
-              name="Phone"
+              name="phone"
               placeholder="Telefonnummer*"
               required
             />
           </div>
           <div class="col-12">
             <textarea
-              name="Message"
+              name="message"
               placeholder="Eventuellt meddelande"
             ></textarea>
           </div>
@@ -72,9 +69,20 @@
       </div>
     </form>
     <!-- Contact Form End -->
-    <!-- Reply Group Start -->
-    
-    <!-- Reply Group End -->
+
+    <!-- Error Group Start -->
+    <div class="error-group">
+      <span class="material-icons txt-light">
+        error_outline
+      </span>
+      <p class="reply-group__title txt-light">
+        <span>Fel</span>!
+      </p>
+      <span class="reply-group__text txt-light-transparent">
+        Ett fel uppstod. Vänligen försök igen.
+      </span>
+    </div>
+    <!-- Error Group End -->
   </div>
 </div>
 <!-- Contact Form Block End -->
