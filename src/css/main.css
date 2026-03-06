@@ -1182,7 +1182,8 @@ form .inputs-description {
   color: rgba(255, 255, 255, 0.6);
 }
 
-.reply-group {
+.reply-group,
+.error-group {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -1201,7 +1202,8 @@ form .inputs-description {
   -moz-transition: opacity 0.5s ease-in-out;
   transition: opacity 0.5s ease-in-out;
 }
-.reply-group.is-visible {
+.reply-group.is-visible,
+.error-group.is-visible {
   opacity: 1;
 }
 .reply-group .material-icons {
